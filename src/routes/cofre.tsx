@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Copy, Download, Eye, EyeOff, LayoutGrid, Lock, Mail, Pencil, Plus, Trash2, Info } from "lucide-react";
 import { accounts, type Service } from "@/components/vault/data";
 import { BrandLockup } from "@/components/vault/BrandLockup";
+import { downloadVaultHtml } from "@/lib/export-vault-html";
 
 export const Route = createFileRoute("/cofre")({
   head: () => ({
