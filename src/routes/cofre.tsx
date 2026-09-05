@@ -105,7 +105,10 @@ function VaultPage() {
             <Lock className="h-4 w-4 text-neon-pink" />
             <span className="hidden sm:inline">Bloquear</span>
           </Link>
-          <button className="flex items-center gap-2 rounded-xl bg-[image:var(--gradient-neon)] px-4 py-2 text-sm font-bold text-primary-foreground shadow-[var(--glow-pink)]">
+          <button
+            onClick={() => downloadVaultHtml(accounts)}
+            className="flex items-center gap-2 rounded-xl bg-[image:var(--gradient-neon)] px-4 py-2 text-sm font-bold text-primary-foreground shadow-[var(--glow-pink)]"
+          >
             <Download className="h-4 w-4" />
             <span className="hidden sm:inline">Baixar HTML atualizado</span>
             <span className="sm:hidden">Baixar</span>
