@@ -132,6 +132,49 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+:root {
+  --background: oklch(0.09 0.03 300);
+  --foreground: oklch(0.97 0.02 320);
+  --card: oklch(0.14 0.05 300);
+  --card-foreground: oklch(0.97 0.02 320);
+  --popover: oklch(0.14 0.05 300);
+  --popover-foreground: oklch(0.97 0.02 320);
+  --primary: oklch(0.68 0.28 330);
+  --primary-foreground: oklch(0.12 0.04 300);
+  --secondary: oklch(0.55 0.25 295);
+  --secondary-foreground: oklch(0.97 0.02 320);
+  --muted: oklch(0.2 0.05 300);
+  --muted-foreground: oklch(0.72 0.06 310);
+  --accent: oklch(0.72 0.22 300);
+  --accent-foreground: oklch(0.12 0.04 300);
+  --border: oklch(0.35 0.12 310 / 40%);
+  --input: oklch(0.35 0.12 310 / 40%);
+  --ring: oklch(0.68 0.28 330);
+
+  --neon-pink: oklch(0.68 0.29 335);
+  --neon-violet: oklch(0.6 0.27 295);
+  --neon-cyan: oklch(0.85 0.15 200);
+  --glow-pink: 0 0 8px oklch(0.68 0.29 335 / 90%), 0 0 28px oklch(0.68 0.29 335 / 60%),
+    0 0 60px oklch(0.6 0.27 295 / 45%);
+  --glow-violet: 0 0 10px oklch(0.6 0.27 295 / 85%), 0 0 40px oklch(0.6 0.27 295 / 50%);
+  --gradient-neon: linear-gradient(
+    100deg,
+    oklch(0.68 0.29 335),
+    oklch(0.6 0.27 295) 55%,
+    oklch(0.85 0.15 200)
+  );
+  --font-display: "Orbitron", system-ui, sans-serif;
+  --font-body: "Rajdhani", system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-neon-pink: var(--neon-pink);
+  --color-neon-violet: var(--neon-violet);
+  --color-neon-cyan: var(--neon-cyan);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -140,5 +183,116 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-body);
   }
 }
+
+@utility text-neon {
+  background-image: var(--gradient-neon);
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 14px oklch(0.68 0.29 335 / 55%));
+}
+
+@utility neon-grid {
+  background-image:
+    linear-gradient(oklch(0.68 0.29 335 / 22%) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.6 0.27 295 / 18%) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: grid-scroll 6s linear infinite;
+}
+
+@keyframes grid-scroll {
+  to {
+    background-position: 0 48px, 48px 0;
+  }
+}
+
+@keyframes logo-float {
+  0%,
+  100% {
+    transform: translateY(-1.5%) scale(1);
+  }
+  50% {
+    transform: translateY(1.5%) scale(1.02);
+  }
+}
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px var(--neon-pink)) drop-shadow(0 0 22px var(--neon-violet));
+  }
+  50% {
+    opacity: 0.75;
+    filter: drop-shadow(0 0 14px var(--neon-pink)) drop-shadow(0 0 44px var(--neon-violet));
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  92%,
+  100% {
+    opacity: 1;
+  }
+  93% {
+    opacity: 0.35;
+  }
+  95% {
+    opacity: 0.9;
+  }
+  97% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-120%);
+  }
+  100% {
+    transform: translateY(520%);
+  }
+}
+
+@keyframes dash-run {
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+
+@utility animate-logo-float {
+  animation: logo-float 5s ease-in-out infinite;
+}
+@utility animate-neon-pulse {
+  animation: neon-pulse 2.6s ease-in-out infinite;
+}
+@utility animate-spin-slow {
+  animation: spin-slow 22s linear infinite;
+}
+@utility animate-flicker {
+  animation: flicker 6s linear infinite;
+}
+@utility animate-scan {
+  animation: scan 4s linear infinite;
+}
+@utility animate-dash-run {
+  animation: dash-run 5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
